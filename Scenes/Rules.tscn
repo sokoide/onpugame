@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/MainTheme.tres" type="Theme" id=1]
+[ext_resource path="res://Scenes/Rules.gd" type="Script" id=2]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Rules" type="RichTextLabel" parent="."]
+margin_left = 16.0
+margin_right = 688.0
+margin_bottom = 1272.0
+theme = ExtResource( 1 )
+text = "ルール）
+
+１か２のボタンを押すとゲームがスタートします。
+１は１小節、２は２小節で１ゲームであることを意味します。
+
+1つの小節には4分音符4つ、2分音符2つ、全音符1つまたはその組み合わせを置くことができます。
+自分の番が来たら、置くことのできる音符を1つ置くか、カードを1枚引くかを選択できます。
+１小節には上記のルール以上の音符は置くことができません。
+
+指定した小説が終わった時一番多くの音符を置くことができた人が勝ちとなります。
+
+このゲームはあなたとコンピュータとの２名での対戦モードしかありません。"
+
+[node name="BtnReturn" type="Button" parent="."]
+margin_left = 200.0
+margin_top = 1088.0
+margin_right = 464.0
+margin_bottom = 1152.0
+theme = ExtResource( 1 )
+text = "タイトルに戻る"
+
+[connection signal="button_up" from="BtnReturn" to="." method="_on_BtnReturn_button_up"]
