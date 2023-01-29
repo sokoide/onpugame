@@ -49,14 +49,29 @@ position = Vector2( 0, 124 )
 script = ExtResource( 4 )
 
 [node name="BtnReturn" type="Button" parent="."]
-margin_left = 136.0
-margin_top = 1216.0
-margin_right = 592.0
-margin_bottom = 1270.0
+margin_left = 32.0
+margin_top = 1208.0
+margin_right = 336.0
+margin_bottom = 1262.0
 theme = ExtResource( 3 )
 text = "タイトルに戻る"
-__meta__ = {
-"_edit_lock_": true
-}
+
+[node name="BtnRestart" type="Button" parent="."]
+margin_left = 384.0
+margin_top = 1208.0
+margin_right = 688.0
+margin_bottom = 1262.0
+theme = ExtResource( 3 )
+text = "１からやり直し"
+
+[node name="BtnDraw" type="Button" parent="."]
+margin_left = 136.0
+margin_top = 1136.0
+margin_right = 592.0
+margin_bottom = 1190.0
+theme = ExtResource( 3 )
+text = "カードを引く"
 
 [connection signal="button_up" from="BtnReturn" to="." method="_on_BtnReturn_button_up"]
+[connection signal="button_up" from="BtnRestart" to="." method="_on_BtnRestart_button_up"]
+[connection signal="button_up" from="BtnDraw" to="." method="_on_BtnDraw_button_up"]

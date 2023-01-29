@@ -1,5 +1,7 @@
 extends Node2D
 
+signal gameover
+
 var r1
 var r2
 var hl: bool = false
@@ -22,6 +24,8 @@ func reset():
 	m2 = []
 	m1sum = 0
 	m2sum = 0
+	update_scores()
+	update()
 
 
 func drop(pos: Vector2, sz: int) -> int:
@@ -99,6 +103,9 @@ func _ready():
 	var h = m.texture.get_height() * m.scale.y
 	var topleft_x = hl_width / 2
 	var topleft_y = hl_width / 2
+	var game = get_node("/root/Node2D")
+
+	connect("gameover", game, "_on_gameover")
 	print("({}, {}) ({}, {})".format([topleft_x, topleft_y, w, h], "{}"))
 
 	r1 = Rect2(topleft_x, topleft_y, w - hl_width, h / 2 - hl_width)
@@ -111,8 +118,12 @@ func _ready():
 
 func _process(delta):
 	if m1sum == 32 and m2sum == 32:
-		# TODO: winner check
-		pass
+		var t = 201
+		if player_points == cpu_points:
+			t = 202
+		elif player_points < cpu_points:
+			t = 203
+		emit_signal("gameover", t)
 
 
 func _draw():
