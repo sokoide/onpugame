@@ -1,4 +1,4 @@
-extends Node2D
+extends Sprite
 
 signal gameover
 
@@ -99,17 +99,19 @@ func update_scores():
 
 func _ready():
 	var m = get_node("/root/Node2D/Measure")
-	var w = m.texture.get_width() * m.scale.x
-	var h = m.texture.get_height() * m.scale.y
-	var topleft_x = hl_width / 2
-	var topleft_y = hl_width / 2
+	var w = m.texture.get_width()
+	var h = m.texture.get_height()
+	var topleft_x = hl_width
+	var topleft_y = hl_width
 	var game = get_node("/root/Node2D")
 
 	connect("gameover", game, "_on_gameover")
-	print("({}, {}) ({}, {})".format([topleft_x, topleft_y, w, h], "{}"))
+	print("Measure ({}, {}) ({}, {})".format([topleft_x, topleft_y, w, h], "{}"))
 
 	r1 = Rect2(topleft_x, topleft_y, w - hl_width, h / 2 - hl_width)
-	r2 = Rect2(topleft_x, topleft_y + h / 2, w - hl_width, h / 2 - hl_width)
+	r2 = Rect2(topleft_x, topleft_y + h / 2 + hl_width, w - hl_width, h / 2 - hl_width)
+	print("r1: {} {}".format([r1.position, r1.size], "{}"))
+	print("r2: {} {}".format([r2.position, r2.size], "{}"))
 
 	lblm1 = get_node("/root/Node2D/Measure/Score1")
 	lblm2 = get_node("/root/Node2D/Measure/Score2")

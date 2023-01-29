@@ -29,17 +29,25 @@ func open_position() -> Vector2:
 		for x in range(100, 100 + 5 * 128, 128):
 			if has_object(Vector2(x + 1, y + 1)) == false:
 				return Vector2(x, y)
-	return Vector2(100, 920)
+	return delete_first_card()
 
 
 func has_object(pos: Vector2) -> bool:
 	for node in get_children():
 		if node is Sprite and node.visible:
 			var r = Rect2(node.position, Vector2(64, 64))
-			print("name: {}, {}".format([node.name, r], "{}"))
 			if r.has_point(pos):
 				return true
 	return false
+
+
+func delete_first_card() -> Vector2:
+	for node in get_children():
+		if node is Sprite and node.name[0] == "@" and node.visible == true:
+			node.visible = false
+			node.queue_free()
+			return node.position
+	return Vector2(0, 0)
 
 
 func delete_all_cards() -> void:
@@ -93,7 +101,7 @@ func _on_gameover(t: int):
 func _ready():
 	randomize()
 	lbl = get_node("LblMessage")
-	mh = get_node("MeasureHighlight")
+	mh = get_node("Measure")
 	timer = Timer.new()
 	timer.connect("timeout", self, "_on_timer_timeout")
 	add_child(timer)

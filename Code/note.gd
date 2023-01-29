@@ -24,7 +24,7 @@ func set_position(pos: Vector2):
 
 func _ready():
 	game = get_node("/root/Node2D")
-	mh = get_node("/root/Node2D/MeasureHighlight")
+	mh = get_node("/root/Node2D/Measure")
 	connect("note_placed", game, "_on_note_placed")
 
 
