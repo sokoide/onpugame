@@ -1,8 +1,11 @@
 extends Sprite
 
+signal note_placed
+
 var ty: String
 var sz: int
 var seleced: bool = false
+var game
 var mh
 
 var can_grab = false
@@ -20,7 +23,9 @@ func set_position(pos: Vector2):
 
 
 func _ready():
+	game = get_node("/root/Node2D")
 	mh = get_node("/root/Node2D/MeasureHighlight")
+	connect("note_placed", game, "_on_note_placed")
 
 
 func _process(delta):
@@ -40,5 +45,8 @@ func _process(delta):
 			dragging = false
 			position = drag_start_position
 		else:
+			# dropped
 			# remove myself
 			queue_free()
+			# send msg to Game.gd
+			emit_signal("note_placed")

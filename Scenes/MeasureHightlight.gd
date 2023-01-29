@@ -17,7 +17,17 @@ var cpu_points: int = 0
 var player_points: int = 0
 
 
+func reset():
+	m1 = []
+	m2 = []
+	m1sum = 0
+	m2sum = 0
+
+
 func drop(pos: Vector2, sz: int) -> int:
+	if not hl:
+		return 0
+
 	var lpos: Vector2 = to_local(pos)
 	var cost: int = 32 / sz
 	draw_r1 = false
@@ -40,11 +50,28 @@ func drop(pos: Vector2, sz: int) -> int:
 	return 0
 
 
+func cpu_try_drop(sz: int) -> void:
+	var cost: int = 32 / sz
+	if m1sum + cost <= 32:
+		m1.append(sz)
+		m1sum += cost
+		cpu_points += 1
+	elif m2sum + cost <= 32:
+		m2.append(sz)
+		m2sum += cost
+		cpu_points += 1
+	update_scores()
+	update()
+
+
 func can_drop(pos: Vector2, sz: int):
 	var lpos: Vector2 = to_local(pos)
 	var cost: int = 32 / sz
 	draw_r1 = false
 	draw_r2 = false
+
+	if not hl:
+		return
 
 	if r1.has_point(lpos):
 		draw_r1 = true
@@ -79,6 +106,7 @@ func _ready():
 
 	lblm1 = get_node("/root/Node2D/Measure/Score1")
 	lblm2 = get_node("/root/Node2D/Measure/Score2")
+	reset()
 
 
 func _process(delta):
@@ -95,7 +123,3 @@ func _draw():
 		draw_rect(r1, cl, false, hl_width, false)
 	if draw_r2:
 		draw_rect(r2, cl, false, hl_width, false)
-
-	# TODO: draw placed notes in m1 and m2
-	for note in m1:
-		print(note)
