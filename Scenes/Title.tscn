@@ -12,14 +12,14 @@ margin_top = 192.0
 margin_right = 520.0
 margin_bottom = 256.0
 theme = ExtResource( 2 )
-text = "音符ゲーム"
+text = "音符ゲーム v1.0.0"
 align = 1
 
 [node name="BtnStart" type="Button" parent="."]
 margin_left = 200.0
-margin_top = 272.0
+margin_top = 304.0
 margin_right = 520.0
-margin_bottom = 336.0
+margin_bottom = 368.0
 rect_scale = Vector2( 0.99897, 1.00498 )
 rect_pivot_offset = Vector2( 136, 64 )
 theme = ExtResource( 2 )
@@ -27,9 +27,9 @@ text = "スタート"
 
 [node name="BtnHelp" type="Button" parent="."]
 margin_left = 200.0
-margin_top = 384.0
+margin_top = 416.0
 margin_right = 520.0
-margin_bottom = 448.0
+margin_bottom = 480.0
 rect_pivot_offset = Vector2( 136, 64 )
 theme = ExtResource( 2 )
 text = "ルール"
