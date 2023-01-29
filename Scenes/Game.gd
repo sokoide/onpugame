@@ -13,9 +13,18 @@ func _ready():
 	var mh = get_node("MeasureHighlight")
 	mh.hl = true
 
+	var i = 0
+	for sz in [1, 2, 4, 8]:
+		var s = Global.create_note("b", sz)
+
+		s.set_position(Vector2(100 + i * 128, 1000))
+		add_child(s)
+		s.print()
+		i += 1
+
 
 func _process(delta):
-	var mouse = get_global_mouse_position()
+	pass
 
 
 func _on_BtnReturn_button_up():
