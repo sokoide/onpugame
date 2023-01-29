@@ -1,17 +1,23 @@
 extends Node2D
 
-var measure
+var turn: int = 0  # 0:you, 1:computer
+var lbl
+var mh
 
 
-func draw_frame(slot: int):
-	pass
+func update_label():
+	if turn == 0:
+		lbl.text = "あなたの番です"
+		mh.hl = true
+	else:
+		lbl.text = "コンピューターの番です"
+		mh.hl = false
 
 
 func _ready():
-	var lbl = get_node("LblMessage")
-	lbl.text = "あなたの番です"
-	var mh = get_node("MeasureHighlight")
-	mh.hl = true
+	turn = 0
+	lbl = get_node("LblMessage")
+	mh = get_node("MeasureHighlight")
 
 	var i = 0
 	for sz in [1, 2, 4, 8]:
@@ -24,7 +30,7 @@ func _ready():
 
 
 func _process(delta):
-	pass
+	update_label()
 
 
 func _on_BtnReturn_button_up():
